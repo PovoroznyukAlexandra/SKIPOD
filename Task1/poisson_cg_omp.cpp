@@ -140,7 +140,7 @@ void CG(
         alpha = znam / dot_prod(pk, work, hx, hy, M, N);
 
         max_val = std::abs(alpha * pk[1][1]);
-        #pragma omp parallel for collapse(2)
+        #pragma omp parallel for collapse(2) reduction(max:max_val)
         for(int i = 1; i < M; ++i) {
             for(int j = 1; j < N; ++j) {
                 res[i][j] += alpha * pk[i][j];
